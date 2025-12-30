@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANOME SPAM - NEON EDITION</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial Black', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: #000;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(255, 0, 100, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 150, 255, 0.3) 0%, transparent 50%);
+            min-height: 100vh;
+            padding: 15px;
+            overflow-x: hidden;
+        }
+        
+        .glitch-text {
+            font-size: 42px;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 5px;
+            position: relative;
+            text-shadow: 
+                0 0 10px #00f7ff,
+                0 0 20px #00f7ff,
+                0 0 40px #ff0080,
+                0 0 80px #ff0080;
+            animation: glitch 3s infinite;
+            margin-bottom: 10px;
+        }
+        
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            1% { transform: translate(-2px, 2px); }
+            2% { transform: translate(2px, -2px); }
+            3% { transform: translate(-2px, -2px); }
+            4% { transform: translate(2px, 2px); }
+            5% { transform: translate(0); }
+        }
+        
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 25px;
+            border: 3px solid;
+            border-image: linear-gradient(45deg, #ff0080, #00f7ff) 1;
+            box-shadow: 
+                0 0 30px rgba(0, 247, 255, 0.5),
+                inset 0 0 30px rgba(255, 0, 128, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #ff0080, #00f7ff, #ff0080);
+            z-index: -1;
+            border-radius: 30px;
+            opacity: 0.3;
+            filter: blur(20px);
+        }
+        
+        .header {
+            background: linear-gradient(to right, rgba(255, 0, 128, 0.9), rgba(0, 247, 255, 0.9));
+            color: white;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::after {
+            content: 'ANOME SPAM';
+            position: absolute;
+            top: 5px;
+            left: 0;
+            right: 0;
+            color: rgba(255, 255, 255, 0.1);
+            font-size: 60px;
+            font-weight: 900;
+            z-index: 0;
+        }
+        
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 15px black;
+        }
+        
+        .header p {
+            position: relative;
+            z-index: 1;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .feature-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff0080, #ffeb3b);
+            color: black;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin: 10px 5px;
+            font-size: 12px;
+            box-shadow: 0 0 15px rgba(255, 0, 128, 0.7);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .form-container {
+            padding: 25px;
+            background: rgba(10, 10, 20, 0.8);
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 10px;
+            color: #00f7ff;
+            font-weight: bold;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px #00f7ff;
+        }
+        
+        .neon-input {
+            width: 100%;
+            padding: 18px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid;
+            border-image: linear-gradient(45deg, #ff0080, #00f7ff) 1;
+            border-radius: 15px;
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(0, 247, 255, 0.2);
+        }
+        
+        .neon-input:focus {
+            outline: none;
+            box-shadow: 0 0 25px rgba(255, 0, 128, 0.5);
+            border-image: linear-gradient(45deg, #00f7ff, #ff0080) 1;
+        }
+        
+        .hint {
+            font-size: 12px;
+            color: #ffeb3b;
+            margin-top: 8px;
+            display: block;
+            font-style: italic;
+        }
+        
+        .toggle-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .toggle-btn {
+            flex: 1;
+            min-width: 200px;
+            padding: 18px;
+            border: none;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .toggle-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .toggle-btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-saved {
+            background: linear-gradient(45deg, #00f7ff, #0088ff);
+            color: black;
+            box-shadow: 0 0 20px rgba(0, 247, 255, 0.5);
+        }
+        
+        .btn-unsaved {
+            background: linear-gradient(45deg, #ff0080, #ff5500);
+            color: white;
+            box-shadow: 0 0 20px rgba(255, 0, 128, 0.5);
+        }
+        
+        .btn-active {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 0, 128, 0.7);
+        }
+        
+        .control-panel {
+            background: rgba(0, 10, 20, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #00f7ff;
+            margin-bottom: 25px;
+        }
+        
+        .control-row {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .slider-container {
+            flex: 1;
+        }
+        
+        .neon-slider {
+            width: 100%;
+            height: 25px;
+            -webkit-appearance: none;
+            background: linear-gradient(to right, #ff0080, #00f7ff);
+            border-radius: 15px;
+            outline: none;
+        }
+        
+        .neon-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 35px;
+            height: 35px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 20px #00f7ff;
+        }
+        
+        .value-display {
+            min-width: 80px;
+            text-align: center;
+            font-weight: bold;
+            color: #00f7ff;
+            font-size: 20px;
+            text-shadow: 0 0 10px #00f7ff;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .btn-main {
+            flex: 1;
+            padding: 22px;
+            border: none;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            min-width: 250px;
+        }
+        
+        .btn-start {
+            background: linear-gradient(45deg, #ff0080, #ff5500);
+            color: white;
+            box-shadow: 0 0 30px rgba(255, 0, 128, 0.7);
+        }
+        
+        .btn-start:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 0, 128, 0.9);
+        }
+        
+        .btn-clear {
+            background: linear-gradient(45deg, #00f7ff, #0088ff);
+            color: black;
+            box-shadow: 0 0 30px rgba(0, 247, 255, 0.7);
+        }
+        
+        .btn-clear:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 247, 255, 0.9);
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            margin-top: 25px;
+            border: 2px solid #00f7ff;
+        }
+        
+        .neon-spinner {
+            width: 70px;
+            height: 70px;
+            border: 5px solid transparent;
+            border-top: 5px solid #ff0080;
+            border-right: 5px solid #00f7ff;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .progress-container {
+            margin-top: 25px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #00f7ff;
+        }
+        
+        .progress-bar {
+            height: 25px;
+            background: linear-gradient(to right, #ff0080, #00f7ff);
+            width: 0%;
+            transition: width 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .result-panel {
+            display: none;
+            margin-top: 30px;
+            background: rgba(0, 10, 20, 0.9);
+            border-radius: 15px;
+            border: 2px solid #ff0080;
+            padding: 25px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .result-header {
+            color: #00f7ff;
+            font-size: 20px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #00f7ff;
+        }
+        
+        .result-list {
+            list-style: none;
+        }
+        
+        .result-item {
+            padding: 12px;
+            margin-bottom: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            border-left: 5px solid;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .result-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(255, 0, 128, 0.3);
+        }
+        
+        .result-item.success {
+            border-left-color: #00f7ff;
+        }
+        
+        .result-item.error {
+            border-left-color: #ff0080;
+        }
+        
+        .status-text {
+            font-weight: bold;
+            text-shadow: 0 0 5px currentColor;
+        }
+        
+        .success .status-text {
+            color: #00f7ff;
+        }
+        
+        .error .status-text {
+            color: #ff0080;
+        }
+        
+        @media (max-width: 768px) {
+            .glitch-text { font-size: 28px; }
+            .header h1 { font-size: 24px; }
+            .btn-main { min-width: 100%; }
+            .action-buttons { flex-direction: column; }
+            .toggle-btn { min-width: 100%; }
+        }
+        
+        /* Particle background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #00f7ff;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            from { transform: translateY(100vh) rotate(0deg); }
+            to { transform: translateY(-100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle Background -->
+    <div class="particles" id="particles"></div>
+    
+    <div class="glitch-text">ANOME SPAM</div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🔥 NEON SPAMMER EDITION 🔥</h1>
+            <p>KIRIM KE NOMOR SAVED/UNSAVED - TANPA NGELEG!</p>
+            
+            <div>
+                <span class="feature-badge">✓ AUTO DELAY</span>
+                <span class="feature-badge">✓ NO SAVE SUPPORT</span>
+                <span class="feature-badge">✓ ANTI-LIMIT</span>
+                <span class="feature-badge">✓ NEON UI</span>
+            </div>
+        </div>
+        
+        <div class="form-container">
+            <!-- Mode Selection -->
+            <div class="toggle-container">
+                <button class="toggle-btn btn-saved btn-active" id="btnSaved" onclick="setMode('saved')">
+                    <i class="fas fa-users"></i> NOMOR DISAVED
+                </button>
+                <button class="toggle-btn btn-unsaved" id="btnUnsaved" onclick="setMode('unsaved')">
+                    <i class="fas fa-user-plus"></i> NOMOR GAK DISAVE
+                </button>
+            </div>
+            
+            <!-- Input Fields -->
+            <div class="input-group">
+                <label class="input-label">📱 NOMOR TELEPON TARGET</label>
+                <textarea 
+                    id="numbers" 
+                    class="neon-input" 
+                    placeholder="Masukkan nomor (pisah dengan koma atau enter)
+Contoh: 6281234567890, 6289876543210
+Contoh2: 081234567890, 085712345678"
+                    rows="4"
+                ></textarea>
+                <span class="hint">Format: 62 atau 0 di depan (auto convert ke 62)</span>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">💬 PESAN SPAM</label>
+                <textarea 
+                    id="message" 
+                    class="neon-input" 
+                    placeholder="Tulis pesan spam kamu di sini..."
+                    rows="6"
+                ></textarea>
+                <span class="hint">Karakter: <span id="charCount">0</span> | Auto URL encode</span>
+            </div>
+            
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <div class="control-row">
+                    <span class="input-label">⚡ SPEED CONTROL</span>
+                    <div class="slider-container">
+                        <input type="range" min="2" max="10" value="5" class="neon-slider" id="delaySlider">
+                    </div>
+                    <div class="value-display">
+                        <span id="delayValue">5</span>s
+                    </div>
+                </div>
+                
+                <div class="control-row">
+                    <span class="input-label">🔁 MAX RETRY</span>
+                    <div class="slider-container">
+                        <input type="range" min="1" max="5" value="2" class="neon-slider" id="retrySlider">
+                    </div>
+                    <div class="value-display">
+                        <span id="retryValue">2</span>x
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn-main btn-start" onclick="startSpamming()">
+                    <i class="fas fa-rocket"></i> LAUNCH SPAM ATTACK
+                </button>
+                <button class="btn-main btn-clear" onclick="clearAll()">
+                    <i class="fas fa-bomb"></i> CLEAR ALL
+                </button>
+            </div>
+            
+            <!-- Loading -->
+            <div class="loading" id="loading">
+                <div class="neon-spinner"></div>
+                <p style="color: #00f7ff; font-size: 18px; margin-top: 15px;">
+                    <i class="fas fa-satellite-dish"></i> SENDING SPAM WAVES...
+                </p>
+                <p style="color: #ffeb3b; font-size: 14px; margin-top: 10px;">
+                    Jangan tutup halaman ini! Biarkan ANOME bekerja!
+                </p>
+            </div>
+            
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            
+            <!-- Results -->
+            <div class="result-panel" id="resultPanel">
+                <div class="result-header">
+                    <i class="fas fa-chart-bar"></i> SPAM REPORT
+                </div>
+                <ul class="result-list" id="resultList"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variables
+        let currentMode = 'saved';
+        let isSpamming = false;
+        
+        // Initialize particles
+        function initParticles() {
+            const particles = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 20}s`;
+                particle.style.background = i % 2 === 0 ? '#00f7ff' : '#ff0080';
+                particles.appendChild(particle);
+            }
+        }
+        
+        // Set mode
+        function setMode(mode) {
+            currentMode = mode;
+            document.getElementById('btnSaved').classList.toggle('btn-active', mode === 'saved');
+            document.getElementById('btnUnsaved').classList.toggle('btn-active', mode === 'unsaved');
+            
+            // Update hint
+            const hint = document.querySelector('.hint');
+            if (mode === 'saved') {
+                hint.textContent = 'Mode: Nomor disaved di kontak (lebih cepat)';
+            } else {
+                hint.textContent = 'Mode: Nomor gak disaved (auto click "Continue to Chat")';
+            }
+        }
+        
+        // Format phone number
+        function formatPhoneNumber(phone) {
+            let cleaned = phone.replace(/\D/g, '');
+            
+            if (cleaned.startsWith('0')) {
+                cleaned = '62' + cleaned.substring(1);
+            } else if (cleaned.startsWith('8')) {
+                cleaned = '62' + cleaned;
+            } else if (!cleaned.startsWith('62')) {
+                cleaned = '62' + cleaned;
+            }
+            
+            return cleaned;
+        }
+        
+        // Parse numbers
+        function parsePhoneNumbers(input) {
+            const numbers = [];
+            const lines = input.split(/[\n,;]+/);
+            
+            lines.forEach(line => {
+                const trimmed = line.trim();
+                if (trimmed) {
+                    const formatted = formatPhoneNumber(trimmed);
+                    if (formatted.length >= 10) {
+                        numbers.push(formatted);
+                    }
+                }
+            });
+            
+            return [...new Set(numbers)];
+        }
+        
+        // Generate WhatsApp URL
+        function generateWhatsAppUrl(phone, message, mode) {
+            const encodedMessage = encodeURIComponent(message);
+            
+            if (mode === 'saved') {
+                // Untuk nomor saved - langsung ke chat
+                return `https://wa.me/${phone}?text=${encodedMessage}`;
+            } else {
+                // Untuk nomor unsaved - pakai api format
+                return `https://api.whatsapp.com/send?phone=${phone}&text=${encodedMessage}&app_absent=1`;
+            }
+        }
+        
+        // Start spamming
+        async function startSpamming() {
+            if (isSpamming) {
+                alert('Spam attack already in progress!');
+                return;
+            }
+            
+            const numbersInput = document.getElementById('numbers').value.trim();
+            const message = document.getElementById('message').value.trim();
+            const delay = parseInt(document.getElementById('delayValue').textContent) * 1000;
+            const maxRetry = parseInt(document.getElementById('retryValue').textContent);
+            
+            // Validation
+            if (!numbersInput) {
+                alert('MASUKIN NOMOR TARGET DULU BRO!');
+                return;
+            }
+            
+            if (!message) {
+                alert('PESAN NYA KOSONG NIH!');
+                return;
+            }
+            
+            const phoneNumbers = parsePhoneNumbers(numbersInput);
+            
+            if (phoneNumbers.length === 0) {
+                alert('GA ADA NOMOR YANG VALID!');
+                return;
+            }
+            
+            // Confirmation
+            if (!confirm(`🚀 LAUNCH SPAM ATTACK KE ${phoneNumbers.length} TARGET?\n\nMode: ${currentMode.toUpperCase()}\nDelay: ${delay/1000}s\nRetry: ${maxRetry}x`)) {
+                return;
+            }
+            
+            // Setup UI
+            isSpamming = true;
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('resultPanel').style.display = 'block';
+            document.getElementById('progressBar').style.width = '0%';
+            
+            const resultList = document.getElementById('resultList');
+            resultList.innerHTML = '';
+            
+            // Variables
+            const total = phoneNumbers.length;
+            let success = 0;
+            let failed = 0;
+            
+            // Spam loop
+            for (let i = 0; i < total; i++) {
+                if (!isSpamming) break;
+                
+                const phone = phoneNumbers[i];
+                let sent = false;
+                
+                // Retry loop
+                for (let retry = 0; retry < maxRetry && !sent; retry++) {
+                    try {
+                        // Generate URL
+                        const url = generateWhatsAppUrl(phone, message, currentMode);
+                        
+                        // Create result item
+                        const listItem = document.createElement('li');
+                        listItem.className = 'result-item';
+                        listItem.innerHTML = `
+                            <span style="color: #fff; font-family: monospace;">${phone}</span>
+                            <span class="status-text">MENGIRIM... (Attempt ${retry + 1}/${maxRetry})</span>
+                        `;
+                        resultList.appendChild(listItem);
+                        listItem.scrollIntoView({ behavior: 'smooth' });
+                        
+                        // Open WhatsApp
+                        const newWindow = window.open(url, `ANOME_${Date.now()}_${i}`, 'width=800,height=600');
+                        
+                        // Wait and check
+                        await new Promise(resolve => setTimeout(resolve, 3000));
+                        
+                        if (newWindow && !newWindow.closed) {
+                            // Success
+                            listItem.className = 'result-item success';
+                            listItem.innerHTML = `
+                                <span style="color: #00f7ff; font-family: monospace;">${phone}</span>
+                                <span class="status-text">✅ TERKIRIM!</span>
+                            `;
+                            success++;
+                            sent = true;
+                            
+                            // Close window after delay
+                            setTimeout(() => {
+                                if (newWindow && !newWindow.closed) {
+                                    newWindow.close();
+                                }
+                            }, 2000);
+                        } else {
+                            // Failed
+                            if (retry === maxRetry - 1) {
+                                listItem.className = 'result-item error';
+                                listItem.innerHTML = `
+                                    <span style="color: #ff0080; font-family: monospace;">${phone}</span>
+                                    <span class="status-text">❌ GAGAL!</span>
+                                `;
+                                failed++;
+                            }
+                        }
+                        
+                    } catch (error) {
+                        console.error('Error:', error);
+                    }
+                }
+                
+                // Update progress
+                const progress = ((i + 1) / total) * 100;
+                document.getElementById('progressBar').style.width = `${progress}%`;
+                
+                // Delay between numbers (except last one)
+                if (i < total - 1) {
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+            }
+            
+            // Complete
+            isSpamming = false;
+            document.getElementById('loading').style.display = 'none';
+            
+            // Show summary
+            const summary = document.createElement('li');
+            summary.className = 'result-item success';
+            summary.style.background = 'linear-gradient(45deg, #ff0080, #00f7ff)';
+            summary.style.color = 'black';
+            summary.style.fontWeight = 'bold';
+            summary.innerHTML = `
+                <span>🔥 SPAM COMPLETE!</span>
+                <span>SUCCESS: ${success} | FAILED: ${failed} | TOTAL: ${total}</span>
+            `;
+            resultList.appendChild(summary);
+            
+            // Play sound (optional)
+            playCompleteSound();
+        }
+        
+        // Play sound
+        function playCompleteSound() {
+            try {
+                const audio = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEAQB8AAEAfAAABAAgAZGF0YQ');
+                // Just for effect - silent audio
+            } catch (e) {}
+        }
+        
+        // Clear all
+        function clearAll() {
+            if (confirm('YAKIN MAU CLEAR SEMUA? SPAM ATTACK AKAN BERHENTI!')) {
+                isSpamming = false;
+                document.getElementById('numbers').value = '';
+                document.getElementById('message').value = '';
+                document.getElementById('charCount').textContent = '0';
+                document.getElementById('resultList').innerHTML = '';
+                document.getElementById('resultPanel').style.display = 'none';
+                document.getElementById('progressBar').style.width = '0%';
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        // Event listeners
+        document.getElementById('delaySlider').addEventListener('input', function() {
+            document.getElementById('delayValue').textContent = this.value;
+        });
+        
+        document.getElementById('retrySlider').addEventListener('input', function() {
+            document.getElementById('retryValue').textContent = this.value;
+        });
+        
+        document.getElementById('message').addEventListener('input', function() {
+            document.getElementById('charCount').textContent = this.value.length;
+        });
+        
+        // Stop spamming on escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && isSpamming) {
+                if (confirm('STOP SPAM ATTACK?')) {
+                    isSpamming = false;
+                }
+            }
+        });
+        
+        // Initialize
+        window.onload = function() {
+            initParticles();
+            setMode('saved');
+            
+            // Auto fill test data (remove in production)
+            document.getElementById('numbers').value = '';
+            document.getElementById('message').value = '🚀 *ANOME SPAM TEST* 🚀\n\nIni adalah pesan test dari ANOME SPAM NEON EDITION!\n\n✅ Fitur: No Save Support\n✅ Anti Limit System\n✅ Neon UI\n\n@ANOME_SPAM_BOT';
+            document.getElementById('charCount').textContent = document.getElementById('message').value.length;
+        };
+    </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</body>
+</html>
